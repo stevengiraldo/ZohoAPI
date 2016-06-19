@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $client = new Client( ['base_uri' => 'https://invoice.zoho.com/api/v3/'] );
         return view('home');
     }
 
