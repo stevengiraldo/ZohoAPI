@@ -10,80 +10,69 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+
+    protected $baseURI;
+    protected $authToken;
+    protected $organizationId;
+    protected $clientHttp;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->baseURI = 'https://invoice.zoho.com/api/v3/';
+        $this->authToken = getenv('AUTH_TOKEN_ZOHO');
+        $this->organizationId = getenv('ORGANIZATION_ID');
+        $this->clientHttp = new Client( ['base_uri' => $this->baseURI] );
+    }
+
     public function index()
     {
-        $client = new Client( ['base_uri' => 'https://invoice.zoho.com/api/v3/'] );
-        return view('home');
+        //return view('home');
+        $invoices = $this->getInvoices();
+        return response()->json( $invoices );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function invoices()
     {
-        //
+        $invoices = $this->getInvoices();
+        return response()->json( $invoices );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    private function getInvoices( $records = 20 )
     {
-        //
+        $clientHttp = $this->clientHttp;
+        $authtoken = $this->authToken;
+        $organization_id = $this->organizationId;
+
+        $response = $clientHttp->get('invoices', [
+                                    'query' => [ 'authtoken'        => $authtoken,
+                                                'organization_id'   => $organization_id,
+                                                'per_page'          => $records ]
+                                    ]);
+        
+        return json_decode( $response->getBody() );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    private function getInvoicesUpperAmount( $amount = 100000 )
     {
-        //
+        $clientHttp = $this->clientHttp;
+        $authtoken = $this->authToken;
+        $organization_id = $this->organizationId;
+
+        $response = $clientHttp->get('invoices', [
+                                    'query' => [ 'authtoken'        => $authtoken,
+                                                'organization_id'   => $organization_id,
+                                                'total_greater_than' => $amount
+                                                ],
+                                    ]);
+        
+        return json_decode( $response->getBody() );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

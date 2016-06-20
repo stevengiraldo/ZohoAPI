@@ -15,3 +15,8 @@ Route::get('/', [
 	'uses' 	=> 'HomeController@index',
 	'as' 	=> 'home_path',
 ]);
+
+Route::get('/invoices', [
+	'uses' 	=> 'HomeController@invoices',
+	'as' 	=> 'invoices_path',
+]);
