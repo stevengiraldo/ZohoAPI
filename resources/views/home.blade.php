@@ -5,7 +5,8 @@
 
         <link href="https://fonts.googleapis.com/css?family=Lato:700" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/theme-classic-all.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/theme-neptune-all_1.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/theme-neptune-all_2.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script type="text/javascript" src="{{ asset('js/ext-all.js') }}"></script>
     </head>
@@ -24,7 +25,7 @@
         </header>
         <section>
             <div class="container">
-                <div id="helloWorldPanel"></div>
+                <div id="invoiceTable"></div>
             </div>
         </section>
     <script type="text/javascript" src="{{ asset('js/ext-all.js') }}"></script>

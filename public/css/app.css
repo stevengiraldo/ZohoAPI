@@ -1,11 +1,14 @@
 body {
-    background: #15abdb;
+    background: #15abdb !important;
 }
 header {
     text-align: center;
     color: #000;
     background: #fff;
     width:100%;
+}
+section .container {
+    padding-top: 50px;
 }
 .title {
     font-size: 24px;
