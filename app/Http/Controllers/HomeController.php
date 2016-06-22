@@ -32,9 +32,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        //return view('home');
-        $invoices = $this->getInvoices();
-        return response()->json( $invoices );
+        return view('home');
     }
 
     public function invoices()
