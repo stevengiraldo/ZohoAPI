@@ -25,6 +25,7 @@
         </header>
         <section>
             <div class="container">
+                <div id="button"></div>
                 <div id="invoiceTable"></div>
             </div>
         </section>
