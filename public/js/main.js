@@ -18,26 +18,32 @@ Ext.onReady(function(){
 	// Creation of data store
 	var invoices = Ext.create('Ext.data.Store', {
 		model: 'Invoice',
-		proxy : {
-			type : 'rest',
-		    actionMethods : {
-		        read : 'GET'
-		    },
-			url : 'invoices',
+		proxy: {
+			type: 'ajax',
+			url: 'invoices',
 			reader: {
-				type : 'json',
-				root : 'invoices'
+				type: 'json',
+				root: 'invoices'
 			}
 		},
-
 		autoLoad: true
 	});
-	// Creation of grid.Pnael
+	// Creation of grid.Panel
 	var containerPanel = Ext.create('Ext.grid.Panel', {
-	 	id                : 'gridId',
-	 	store             : invoices,
-	 	stripeRows        : true,
-	 	renderTo          :'invoiceTable',
+	  	requires: [
+	        'Ext.grid.feature.Grouping'
+	    ],
+	 	id: 'gridId',
+	 	store: invoices,
+	 	stripeRows: true,
+	 	renderTo:'invoiceTable',
+        features: [{
+            id: 'group',
+            ftype: 'groupingsummary',
+            
+            hideGroupedHeader: true,
+            enableGroupingMenu: false
+        }],
 	    dockedItems: [
 	        {
 	            xtype: 'toolbar',
@@ -47,29 +53,36 @@ Ext.onReady(function(){
 	                    xtype: 'button',
 	                    text: 'Actualizar',
 	                    handler: function(){
-	                    	invoices.clearFilter();
+	                    	//invoices.clearFilter();
 	                    	invoices.load();
 	                    }
 	                },
 	                {
 	                    xtype: 'button',
 	                    text: 'Facturas mayores a 100.000',
-	                    handler : function(){
+	                    handler: function(){
 							var invoicesUpper100 = new Ext.util.Filter({
+								id: 'filter100',
 							    filterFn: function(item) {
 							        return item.data.total > 100000;
 							    }
 							});
-		                    invoices.filter(invoicesUpper100);
+							if ( invoices.isFiltered() ) {
+								invoices.removeFilter('filter100');
+							} else {
+		                    	invoices.filter(invoicesUpper100);
+							};
 	                    }
 	                },
 	                {
 	                    xtype: 'button',
 	                    text: 'Agrupar por cliente',
-	                    enableToggle: true,
-	                    handler : function(){
-							//invoices.group('customer_name');
-							//containerPanel.getView().getFeature('group').toggleSummaryRow();
+	                    handler: function(){
+	                    	if ( invoices.isGrouped() ) {
+	                    		invoices.clearGrouping();
+	                    	} else {
+	                    		invoices.group('customer_name');
+	                    	};
 	                    }
 	                }
 	            ]
@@ -133,12 +146,6 @@ Ext.onReady(function(){
 	 		dataIndex: "currency_code",
 	 		flex: .3,
 	 		hideable: false
-	 	}],
-        features: [{
-            id: 'group',
-            ftype: 'groupingsummary',
-            hideGroupedHeader: true,
-            enableGroupingMenu: false
-        }]
+	 	}]
 	 });
 });
