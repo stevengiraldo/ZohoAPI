@@ -5,10 +5,10 @@
 
         <link href="https://fonts.googleapis.com/css?family=Lato:700:400" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/theme-crisp-touch-all_1.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/theme-crisp-touch-all_2.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <script type="text/javascript" src="{{ asset('js/ext-all.js') }}"></script>
+        <link rel="stylesheet" href="{{ secure_asset('css/theme-crisp-touch-all_1.css') }}" />
+        <link rel="stylesheet" href="{{ secure_asset('css/theme-crisp-touch-all_2.css') }}" />
+        <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+        <script type="text/javascript" src="{{ secure_asset('js/ext-all.js') }}"></script>
     </head>
     <body>
         <header>
@@ -34,7 +34,7 @@
         <footer>
             <span>© Steven Giraldo</span>
         </footer>
-    <script type="text/javascript" src="{{ asset('js/ext-all.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ secure_asset('js/ext-all.js') }}"></script>
+    <script type="text/javascript" src="{{ secure_asset('js/main.js') }}"></script>
     </body>
 </html>
