@@ -4,10 +4,10 @@ Ext.define('Invoice', {
 	fields: [
 		{ name: 'invoice_number', mapping: 'invoice_number' },
 		{ name: 'customer_name', mapping: 'customer_name' },
+		{ name: 'customer_id', mapping: 'customer_id' },
 		{ name: 'date', mapping: 'date'},
 		{ name: 'due_date', mapping: 'due_date' },
 		{ name: 'total', mapping: 'total' },
-		{ name: 'currency_code', mapping: 'currency_code' }
 	]
 });
 
@@ -47,7 +47,15 @@ Ext.onReady(function(){
 	    dockedItems: [
 	        {
 	            xtype: 'toolbar',
-	            dock: 'top',  
+	            dock: 'top',
+			    style: {
+			      background: '#15abdb',
+			      border: 'none'
+			    },
+				layout: {
+				    pack: 'center',
+				    type: 'hbox'
+				},
 	            items: [
 	                {
 	                    xtype: 'button',
@@ -90,10 +98,10 @@ Ext.onReady(function(){
 	    ],
 	 	columns:
 	 	[{ 
-	 		header: "Número Factura",
+	 		header: "# Factura",
 	 		dataIndex: 'invoice_number',	
 	 		id : 'invoice_id',
-	 		flex: .4,
+	 		flex: .3,
 	 		hideable: false,    
 	 		sortable: true,
             summaryType: 'count',
@@ -103,12 +111,17 @@ Ext.onReady(function(){
 	 	},{
 	 		header: "Nombre cliente", 
 	 		dataIndex: 'customer_name',
-	 		flex: 1,
+	 		flex: .7,
 	 		sortable: true
+	 	},{
+	 		header: "# cliente",
+	 		dataIndex: "customer_id",
+	 		flex: .5,
+	 		hideable: true
 	 	},{
 	 		header: "Fecha facturación",
 	 		dataIndex: "date",
-	 		flex: .4,
+	 		flex: .5,
 	 		sortable: true,
             renderer: Ext.util.Format.dateRenderer('d/m/Y'),
             summaryRenderer: Ext.util.Format.dateRenderer('d/m/Y'),
@@ -118,7 +131,7 @@ Ext.onReady(function(){
 	 	},{
 	 		header: "Fecha vencimiento",
 	 		dataIndex: "due_date",
-	 		flex: .4,
+	 		flex: .5,
 	 		sortable: true,
             renderer: Ext.util.Format.dateRenderer('d/m/Y'),
             summaryRenderer: Ext.util.Format.dateRenderer('d/m/Y'),
@@ -141,11 +154,6 @@ Ext.onReady(function(){
             field: {
                 xtype: 'numberfield'
             }
-	 	},{
-	 		header: "Moneda",
-	 		dataIndex: "currency_code",
-	 		flex: .3,
-	 		hideable: false
 	 	}]
 	 });
 });
