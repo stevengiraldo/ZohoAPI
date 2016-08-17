@@ -11,7 +11,7 @@ This is a simple interface that combine Laravel and ExtJS to connect with Zoho A
 * Heroku
 
 ### Example
-(http://invoicescid.herokuapp.com/)
+http://invoicescid.herokuapp.com/
 
 ### License
 
